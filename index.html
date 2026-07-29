@@ -3,45 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>حسابداری</title>
+    <title>حسابداری هوشمند ساحل</title>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #090d16;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        #loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-color: #090d16;
             color: #ffffff;
-            font-family: system-ui, -apple-system, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
+            z-index: 9999;
+            transition: opacity 0.4s ease;
         }
         .loader {
             border: 4px solid #1e293b;
             border-top: 4px solid #f59e0b;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px auto;
+            width: 45px;
+            height: 45px;
+            animation: spin 0.9s linear infinite;
+            margin-bottom: 15px;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <div>
+
+    <!-- لودر نرم‌افزار -->
+    <div id="loader-container">
         <div class="loader"></div>
-        <p>در حال اتصال به سیستم حسابداری...</p>
+        <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">در حال بارگذاری سیستم حسابداری...</p>
     </div>
 
-    <script>
-        // لینک جدید Web App گوگل اسکریپت خود را اینجا بگذارید
-        const GOOGLE_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzYNO1knb3FoyfPBi_oapa9ok-wiBx6wqehwV1Q-eZPHJQ7DBgDpuiYKkuyH7ZJ4Vt1/exec";
+    <!-- نمایش مستقیم برنامه درون اپلیکیشن -->
+    <iframe 
+        id="app-frame"
+        src="https://script.google.com/macros/s/AKfycbzYNO1knb3FoyfPBi_oapa9ok-wiBx6wqehwV1Q-eZPHJQ7DBgDpuiYKkuyH7ZJ4Vt1/exec"
+        allow="geolocation; microphone; camera"
+        onload="hideLoader()">
+    </iframe>
 
-        window.location.href = GOOGLE_WEB_APP_URL;
+    <script>
+        // مخفی کردن لودر پس از بارگذاری کامل صفحه گوگل اسکریپت
+        function hideLoader() {
+            const loader = document.getElementById('loader-container');
+            if (loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 400);
+            }
+        }
+
+        // پشتیبانی از بازنشانی در صورت بروز خطا یا کندی اینترنت
+        setTimeout(() => {
+            hideLoader();
+        }, 8000);
     </script>
 </body>
 </html>
