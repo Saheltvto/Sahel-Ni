@@ -33,7 +33,7 @@ jobs:
 
       - name: Create Capacitor Config JSON
         run: |
-          echo '{"appId":"com.accounting.app","appName":"حسابداری","webDir":"www"}' > capacitor.config.json
+          echo '{"appId":"com.accounting.app","appName":"حسابداری هوشمند ساحل","webDir":"www"}' > capacitor.config.json
 
       - name: Add Android Platform
         run: |
