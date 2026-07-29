@@ -29,11 +29,11 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          npm install @capacitor/cli @capacitor/core @capacitor/android @capacitor/assets
+          npm install @capacitor/cli@5.7.0 @capacitor/core@5.7.0 @capacitor/android@5.7.0 @capacitor/assets@3.0.5
 
-      - name: Initialize Capacitor
+      - name: Create Capacitor Config JSON
         run: |
-          npx cap init "حسابداری" "com.accounting.app" --web-dir www
+          echo '{"appId":"com.accounting.app","appName":"حسابداری","webDir":"www"}' > capacitor.config.json
 
       - name: Add Android Platform
         run: |
