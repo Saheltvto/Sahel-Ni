@@ -20,6 +20,12 @@ jobs:
         with:
           node-version: 18
 
+      - name: Prepare Web Directory
+        run: |
+          mkdir -p www
+          cp index.html www/
+          if [ -f manifest.json ]; then cp manifest.json www/; fi
+
       - name: Install Dependencies
         run: |
           npm install
@@ -27,7 +33,7 @@ jobs:
 
       - name: Initialize Capacitor
         run: |
-          npx cap init "حسابداری" "com.accounting.app" --web-dir .
+          npx cap init "حسابداری" "com.accounting.app" --web-dir www
 
       - name: Add Android Platform
         run: |
